@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admins — Yimusibwa International Ministries</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="site-logo"><img src="img/call.png" alt="YIM logo"></div>
+      <div>
+        <h1 class="site-title">Yimusibwa International Ministries</h1>
+        <p class="site-sub">Admin area</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation intentionally removed on the admin page to avoid linking to public pages -->
+
+  <main class="container">
+    <section class="card" id="admin-dashboard">
+      <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+        <h2>Admin Dashboard</h2>
+        <div>
+          <button class="btn" id="logoutBtn">Sign out</button>
+        </div>
+      </div>
+      </header>
+	<nav class="site-nav"><div class="container"><ul>
+		<li><a href="index.html">Home</a></li>
+		<li><a href="services.html">Services</a></li>
+		<li><a href="offertory.html">Offertory</a></li>
+		<li><a href="about.html">About</a></li>
+		<li><a href="attend.html">Attend</a></li>
+		
+		<li><a href="contact.html">Contact</a></li>
+	</ul></div></nav>
+      <div style="margin-top:12px">
+        <nav style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn" id="tabEdit">Edit Pages</button>
+          <button class="btn" id="tabSubs">View Submissions</button>
+          <button class="btn" id="tabOffers">View Offers</button>
+        </nav>
+      </div>
+
+      <div id="tabContent" style="margin-top:16px">
+        <!-- Edit Pages -->
+        <div id="editPane">
+          <label>Select page to edit<br>
+            <select id="pageSelect" style="width:100%;padding:8px;margin-top:6px">
+              <option value="index.html">index.html</option>
+              <option value="about.html">about.html</option>
+              <option value="services.html">services.html</option>
+              <option value="offertory.html">offertory.html</option>
+              <option value="attend.html">attend.html</option>
+              <option value="contact.html">contact.html</option>
+              <option value="admins.html">admins.html</option>
+            </select>
+          </label>
+
+          <div style="margin-top:12px">
+            <textarea id="pageEditor" rows="18" style="width:100%;padding:10px;font-family:monospace;font-size:13px"></textarea>
+          </div>
+
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn" id="saveLocal">Save to Local</button>
+            <button class="btn" id="previewBtn">Preview</button>
+            <button class="btn" id="downloadBtn">Download</button>
+            <button class="btn" id="applyBtn">Open Preview Window</button>
+          </div>
+        </div>
+
+        <!-- Submissions -->
+        <div id="subsPane" style="display:none">
+          <h3>Contact Submissions</h3>
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">
+            <input id="subsSearch" placeholder="Search name, email or message" style="flex:1;padding:8px;border-radius:8px;border:1px solid #ddd">
+            <button class="btn" id="refreshSubs">Refresh</button>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+            <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="selectAll"> Select all visible</label>
+            <button class="btn" id="markRead">Mark Read</button>
+            <button class="btn" id="markUnread">Mark Unread</button>
+            <button class="btn" id="deleteSelected">Delete</button>
+            <div style="flex:1"></div>
+            <button class="btn" id="exportSubs">Export CSV</button>
+            <button class="btn" id="clearSubs">Clear All</button>
+          </div>
+
+          <div id="subsList" class="small muted">Loading submissions…</div>
+        </div>
+
+        <!-- Offers -->
+        <div id="offersPane" style="display:none">
+          <h3>Recorded Offers</h3>
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">
+            <input id="offersSearch" placeholder="Search name, phone or method" style="flex:1;padding:8px;border-radius:8px;border:1px solid #ddd">
+            <button class="btn" id="refreshOffers">Refresh</button>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+            <button class="btn" id="exportOffers">Export CSV</button>
+            <button class="btn" id="clearOffers">Clear All Offers</button>
+          </div>
+          <div id="offersList" class="small muted">Loading offers…</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin-utils.js" defer></script>
+  <script src="admins.js" defer></script>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>© Yimusibwa International Ministries</div>
+      <div class="socials">
+        <a href="http://www.x.com/@yimusibwaministries" target="_blank" rel="noopener"><img src="img/x.png" alt="X"></a>
+        <a href="mailto:yimusibwaministries@gmail.com"><img src="img/emailj.jpg" alt="Email"></a>
+        <a href="http://www.tiktok.com/@yimusibwaministries" target="_blank" rel="noopener"><img src="img/tik.png" alt="TikTok"></a>
+        <a href="https://www.instagram.com/yimusibwaministries" target="_blank" rel="noopener"><img src="img/ig.png" alt="Instagram"></a>
+        <a href="https://www.linkedin.com/company/yimusibwaministries" target="_blank" rel="noopener"><img src="img/link.png" alt="LinkedIn"></a>
+        <a href="https://wa.me/25672535776" target="_blank" rel="noopener"><img src="img/what.jpg" alt="WhatsApp"></a>
+        <a href="tel:+25672535776"><img src="img/call.png" alt="Call"></a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

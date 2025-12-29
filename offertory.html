@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Offertory — Yimusibwa International Ministries</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<header class="site-header">
+		<div class="wrap">
+			<div class="site-logo"><img src="img/call.png" alt="YIM logo"></div>
+			<div>
+				<h1 class="site-title">Yimusibwa International Ministries</h1>
+				<p class="site-sub">Serving God With Passion</p>
+			</div>
+		</div>
+	</header>
+	<nav class="site-nav"><div class="container"><ul>
+		<li><a href="index.html">Home</a></li>
+		<li><a href="services.html">Services</a></li>
+		<li><a href="offertory.html">Offertory</a></li>
+		<li><a href="about.html">About</a></li>
+		<li><a href="attend.html">Attend</a></li>
+		
+		<li><a href="contact.html">Contact</a></li>
+	</ul></div></nav>
+
+	<main class="container">
+		<section class="card">
+			<h2>Support Our Ministry</h2>
+			<p>Your giving helps us run community programs, support families and spread the gospel.</p>
+			<h3>How to Give</h3>
+			<ul>
+				<li>Mobile money — MTN Mobile Money: <a href="tel:+256777956913">+256 0777956913</a></li>
+				<li>Mobile money — Airtel Money: <a href="tel:+256704290607">+256 704 290 607</a></li>
+				<li>In person during services</li>
+			
+				<form id="offerForm" style="margin-top:12px">
+				  <label style="display:block;margin-bottom:8px" required>Name <br>
+				    <input id="offerName" placeholder="Your name" style="width:100%;padding:8px;margin-top:6px">
+				  </label>
+									<label style="display:block;margin-bottom:8px">Phone (for mobile money)<br>
+										<input id="offerPhone" inputmode="numeric" pattern="\d*" maxlength="15" placeholder="2567XXXXXXXX" style="width:100%;padding:8px;margin-top:6px">
+									</label>
+				  <label style="display:block;margin-bottom:8px">Amount (UGX)<br>
+				    <input id="offerAmount" type="number" min="1" placeholder="Amount" style="width:100%;padding:8px;margin-top:6px">
+				  </label>
+									<label style="display:block;margin-bottom:8px">Payment method<br>
+										<select id="offerMethod" style="width:100%;padding:8px;margin-top:6px">
+											<option value="mtn">MTN Mobile Money</option>
+											<option value="airtel">Airtel Money</option>
+										</select>
+									</label>
+				  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+				    <button class="btn" type="submit"> Offer</button>
+				    <button class="btn" type="button" id="offerInstructions">Payment Instructions</button>
+				  </div>
+				  <div id="offerMsg" style="margin-top:10px" class="small muted"></div>
+				</form>
+
+				<script>
+				document.addEventListener('DOMContentLoaded', function(){
+				  const form = document.getElementById('offerForm');
+				  const msg = document.getElementById('offerMsg');
+				  
+				  form && form.addEventListener('submit', function(e){
+				    e.preventDefault();
+				    const name = (document.getElementById('offerName').value||'').trim();
+				    const phone = (document.getElementById('offerPhone').value||'').trim();
+				    const amount = Number(document.getElementById('offerAmount').value||0);
+				    const method = document.getElementById('offerMethod').value;
+				    
+				    if(!amount || amount <= 0){ 
+				      msg.style.display = 'block';
+				      msg.textContent = 'Enter a valid amount.'; 
+				      return; 
+				    }
+				    
+				    // Send to PHP backend
+				    fetch('save-offer.php', {
+				      method: 'POST',
+				      headers: { 'Content-Type': 'application/json' },
+				      body: JSON.stringify({ name, phone, amount, method })
+				    })
+				    .then(response => response.json())
+				    .then(data => {
+				      if (data.success) {
+				        alert('Offer received, God bless you');
+				        msg.style.display = 'block';
+				        msg.textContent = 'Thank you — your intention has been recorded. Use the provided mobile money number to complete payment.';
+				        form.reset();
+				      } else {
+				        msg.style.display = 'block';
+				        msg.textContent = 'Error: ' + (data.error || 'Could not save offer');
+				      }
+				    })
+				    .catch(err => {
+				      console.error('Error:', err);
+				      // Fallback to localStorage if PHP fails
+				      const offers = (function(){ try{ return JSON.parse(localStorage.getItem('yim_offers')||'[]'); }catch(e){return []} })();
+				      offers.push({ name, phone, amount, method, ts: Date.now() });
+				      localStorage.setItem('yim_offers', JSON.stringify(offers));
+				      alert('Offer received, God bless you');
+				      msg.style.display = 'block';
+				      msg.textContent = 'Thank you — your intention has been recorded. Use the provided mobile money number to complete payment.';
+				      form.reset();
+				    });
+				  });
+									const inst = document.getElementById('offerInstructions');
+									inst && inst.addEventListener('click', ()=>{
+										alert('MTN: Dial *165*6*2# or send to 0777956913. Airtel: Dial *185# or send to +256704290607.');
+									});
+
+									// Enforce digits-only on phone input
+									const phoneInput = document.getElementById('offerPhone');
+									if(phoneInput){
+										phoneInput.addEventListener('input', function(e){
+											const cleaned = this.value.replace(/\D/g, '');
+											if(this.value !== cleaned) this.value = cleaned;
+										});
+										phoneInput.addEventListener('paste', function(e){
+											e.preventDefault();
+											const text = (e.clipboardData || window.clipboardData).getData('text') || '';
+											this.value = text.replace(/\D/g, '');
+										});
+									}
+				});
+				</script>
+			
+			<p>If you'd like a receipt or gift aid information, please <a href="contact.html">contact us</a>.</p>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="wrap">
+			<div>© Yimusibwa International Ministries</div>
+			<div class="socials">
+				<a href="http://www.x.com/@yimusibwaministries" target="_blank" rel="noopener"><img src="img/x.png" alt="X"></a>
+				<a href="mailto:yimusibwaministries@gmail.com"><img src="img/emailj.jpg" alt="Email"></a>
+				<a href="http://www.tiktok.com/@yimusibwaministries" target="_blank" rel="noopener"><img src="img/tik.png" alt="TikTok"></a>
+				<a href="https://www.instagram.com/yimusibwaministries" target="_blank" rel="noopener"><img src="img/ig.png" alt="Instagram"></a>
+				<a href="https://www.linkedin.com/company/yimusibwaministries" target="_blank" rel="noopener"><img src="img/link.png" alt="LinkedIn"></a>
+				<a href="https://wa.me/25672535776" target="_blank" rel="noopener"><img src="img/what.jpg" alt="WhatsApp"></a>
+				<a href="tel:+25672535776"><img src="img/call.png" alt="Call"></a>
+			</div>
+		</div>
+	</footer>
+	<script src="admin-utils.js" defer></script>
+	</body>
+	</html>

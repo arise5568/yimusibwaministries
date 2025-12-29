@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Contact — Yimusibwa International Ministries</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<header class="site-header">
+		<div class="wrap">
+			<div class="site-logo"><img src="img/call.png" alt="YIM logo"></div>
+			<div>
+				<h1 class="site-title">Yimusibwa International Ministries</h1>
+				<p class="site-sub">Serving God With Passion</p>
+			</div>
+		</div>
+	</header>
+	<nav class="site-nav"><div class="container"><ul>
+		<li><a href="index.html">Home</a></li>
+		<li><a href="services.html">Services</a></li>
+		<li><a href="offertory.html">Offertory</a></li>
+		<li><a href="about.html">About</a></li>
+		<li><a href="attend.html">Attend</a></li>
+		
+		<li><a href="contact.html">Contact</a></li>
+	</ul></div></nav>
+
+	<main class="container">
+		<section class="card">
+			<h2>Contact Us</h2>
+			<p>If you have questions or need prayer, we'd love to hear from you.</p>
+			<ul>
+				<li>Email: <a href="mailto:yimusibwaministries@gmail.com">yimusibwaministries@gmail.com</a></li>
+				<li>Phone: <a href="tel:+25672535776">+256 725 35776</a></li>
+				<li >Address: <b style="color:blue"> <a href="https://www.google.com/maps/search/?api=1&query=Ganda+Nasere">Nasere, Ganda, Nansana,Kampala</a></b></li>
+			</ul>
+		</section>
+
+		<section class="card">
+			<h3>Send a Message</h3>
+			<form action="#" method="post">
+				<label>Name<br><input id="contactName" type="text" name="name" style="width:100%;padding:8px;margin-top:6px" required></label>
+				<label style="display:block;margin-top:10px" required>Email<br><input id="contactEmail" type="email" name="email" style="width:100%;padding:8px;margin-top:6px"></label>
+				<label style="display:block;margin-top:10px" required>Message<br><textarea id="contactMessage" name="message" rows="5" style="width:100%;padding:8px;margin-top:6px"></textarea></label>
+				<p><button class="btn" id="contactSend" type="submit" style="margin-top:10px">Send</button></p>
+			</form>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="wrap">
+			<div>© Yimusibwa International Ministries</div>
+			<div class="socials">
+				<a href="http://www.x.com/@yimusibwaministries" target="_blank" rel="noopener"><img src="img/x.png" alt="X"></a>
+				<a href="mailto:yimusibwaministries@gmail.com"><img src="img/emailj.jpg" alt="Email"></a>
+				<a href="http://www.tiktok.com/@yimusibwaministries" target="_blank" rel="noopener"><img src="img/tik.png" alt="TikTok"></a>
+				<a href="https://www.instagram.com/yimusibwaministries" target="_blank" rel="noopener"><img src="img/ig.png" alt="Instagram"></a>
+				<a href="https://www.linkedin.com/company/yimusibwaministries" target="_blank" rel="noopener"><img src="img/link.png" alt="LinkedIn"></a>
+				<a href="https://wa.me/25672535776" target="_blank" rel="noopener"><img src="img/what.jpg" alt="WhatsApp"></a>
+				<a href="tel:+25672535776"><img src="img/call.png" alt="Call"></a>
+			</div>
+		</div>
+	</footer>
+		<script>
+			(function(){
+				const form = document.querySelector('form[action="#"]');
+				if(!form) return;
+				form.addEventListener('submit', function(e){
+					e.preventDefault();
+					const name = document.getElementById('contactName').value.trim();
+					const email = document.getElementById('contactEmail').value.trim();
+					const message = document.getElementById('contactMessage').value.trim();
+					const subs = JSON.parse(localStorage.getItem('yim_submissions')||'[]');
+					subs.push({name, email, message, ts: Date.now()});
+					localStorage.setItem('yim_submissions', JSON.stringify(subs));
+					alert('Thank you — your message has been stored (demo).');
+					form.reset();
+				});
+			})();
+		</script>
+	<script src="admin-utils.js" defer></script>
+</body>
+</html>

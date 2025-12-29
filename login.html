@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Sign In — Yimusibwa International Ministries</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="robots" content="noindex">
+  <style>
+    .login-wrap{max-width:520px;margin:48px auto;padding:18px;background:#fff;border-radius:12px;box-shadow:0 8px 24px rgba(3,12,27,.06)}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="site-logo"><img src="img/call.png" alt="YIM logo"></div>
+      <div>
+        <h1 class="site-title">Yimusibwa International Ministries</h1>
+        <p class="site-sub">Administrator Sign In</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="login-wrap">
+      <h2>Sign in to Admin</h2>
+      <p class="small muted">Enter your administrator credentials to access the dashboard.</p>
+      <form id="loginFormLocal">
+        <label>Username<br><input id="loginUserLocal" type="text" name="username" style="width:100%;padding:8px;margin-top:6px"></label>
+        <label style="display:block;margin-top:10px">rd<br><input id="loginPassLocal" type="rd" name="rd" style="width:100%;padding:8px;margin-top:6px"></label>
+        <p style="margin-top:12px"><button class="btn" type="submit">Sign In</button></p>
+      </form>
+    
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('loginFormLocal').addEventListener('submit', function(e){
+      e.preventDefault();
+      const u = document.getElementById('loginUserLocal').value.trim();
+      const p = document.getElementById('loginPassLocal').value;
+      if(u === 'arisetech' && p === 'a1r2i3s4e5'){
+        localStorage.setItem('yim_admin','1');
+        // go to admin dashboard
+        location.replace('admins.html');
+      } else {
+        alert('Invalid credentials (demo).');
+      }
+    });
+  </script>
+</body>
+</html>
